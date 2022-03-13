@@ -65,7 +65,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   output: {
     filename: "[name].[contenthash:5].js",

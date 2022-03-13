@@ -54,7 +54,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['.js', '.jsx'],
     },
     output: {
         filename: '[name:5].js',
