@@ -2,17 +2,17 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const findSrc = name => `/src/${name}/index.js`
+const findSrc = name => `/src/${name}/index.js`;
 
 module.exports = {
     entry: {
         main: findSrc('home')
     },
     mode: 'development',
-    devtools: 'eval-source-map',
-    modules: {
+    devtool: 'eval-source-map',
+    module: {
         rules: [
-            { 
+            {
                 test: /\.(png|jpg)$/,
                 type: 'asset',
                 parser: {
@@ -40,16 +40,21 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [ '@babel/env', '@babel/preset-react' ],
+                        presets: [ '@babel/env', '@babel/preset-react'],
                         plugins: [ '@babel/plugin-proposal-class-properties' ]
                     }
                 }
             },
             {
                 test: /\.hbs$/,
-                use: [ 'handlebars-loader' ]
+                use: [
+                    'handlebars-loader'
+                ]
             }
         ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
     },
     output: {
         filename: '[name:5].js',
@@ -59,20 +64,17 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            title: 'homepage',
+            title: 'home page',
             chunks: ['main'],
             description: 'page description',
             template: 'src/page-template.hbs'
-        })
+        },)
     ],
     devServer: {
         static: {
-            directory: path.resolve(__dirname, '../dist')
+            directory: path.resolve(__dirname, '../dist/')
         },
         compress: false,
         port: 9000
     }
 }
-
-
-
